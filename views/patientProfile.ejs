@@ -1,0 +1,50 @@
+<!-- Display patient information -->
+<h1><%= patient.name %></h1>
+<p>Phone Number: <%= patient.phoneNumber %></p>
+<a href="/patients/<%= patient._id %>/create_report">Create Report</a>
+<br />
+<button onclick="fetchAndDisplayReports()">Fetch All Reports</button>
+<table id="reportsTable">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Category</th>
+      <th>Status</th>
+      <!-- Add more columns as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Reports will be dynamically added here -->
+  </tbody>
+</table>
+<script>
+  async function fetchAndDisplayReports() {
+    try {
+      const patientId = "<%= patient._id %>";
+      const response = await fetch(`/patients/${patientId}/all_reports`);
+    //   console.log(await response.json());
+      const { reports } = await response.json();
+      console.log(reports);
+      // Clear existing table rows
+      const tableBody = document.querySelector("#reportsTable tbody");
+      tableBody.innerHTML = "";
+
+      // Populate the table with reports
+      reports.forEach((reports) => {
+        const row = document.createElement("tr");
+        const dateCell = document.createElement("td");
+        dateCell.textContent = new Date(reports.date).toLocaleDateString();
+        row.appendChild(dateCell);
+        const categoryCell = document.createElement("td");
+        categoryCell.textContent = reports.category;
+        row.appendChild(categoryCell);
+        const statusCell = document.createElement("td");
+        statusCell.textContent = reports.status;
+        row.appendChild(statusCell);
+        tableBody.appendChild(row);
+      });
+    } catch (error) {
+      console.error("Error fetching reports:", error);
+    }
+  }
+</script>

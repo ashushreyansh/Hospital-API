@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor's Profile</title>
+  </head>
+  <body>
+    <h1>Welcome, <%= doctor.email %>!</h1>
+
+    <a href="/reports/Negative">View Negative Reports</a>
+    <br />
+    <br />
+    <a href="/reports/Travelled-Quarantine"
+      >View Travelled-Quarantine Reports</a
+    >
+    <br />
+    <br />
+    <a href="/reports/Symptoms-Quarantine">View Symptoms-Quarantine Reports</a>
+    <br />
+    <br />
+    <a href="/reports/Positive-Admit">View Positive-Admit Reports</a>
+    <br />
+    <br />
+
+    <!-- Buttons for other navigation -->
+    <a href="/patients/register">Register Patient</a>
+    <br />
+    <a href="/logout">Logout</a>
+  </body>
+</html>

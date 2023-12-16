@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Report</title>
+  </head>
+  <body>
+    <h1>Create Report</h1>
+    <p>Patient Name: <%= patient.name %></p>
+    <p>Patient Phone Number: <%= patient.phoneNumber %></p>
+    <p>Doctor Email: <%= doctorEmail %></p>
+    <!-- Add more fields for category, status, etc. as needed -->
+    <form action="/patients/<%= patient._id %>/create_report" method="post">
+      <label for="category">Category:</label>
+      <input type="text" id="category" name="category" required />
+      <br />
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="Negative">Negative</option>
+        <option value="Travelled-Quarantine">Travelled-Quarantine</option>
+        <option value="Symptoms-Quarantine">Symptoms-Quarantine</option>
+        <option value="Positive-Admit">Positive-Admit</option>
+      </select>
+      <br />
+      <button type="submit">Submit Report</button>
+    </form>
+  </body>
+</html>

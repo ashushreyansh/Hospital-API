@@ -1,18 +1,19 @@
 const passport = require("passport");
-const local = require("passport-local").Strategy;
-const User = require("../models/userModel");
-const bcrypt = require("bcrpyt");
+const LocalStrategy = require("passport-local").Strategy;
+const Doctor = require("../models/doctorModel");
+const bcrypt = require("bcrypt");
 
 passport.use(
-  new local(
+  "doctor-local",
+  new LocalStrategy(
     { usernameField: "email", passwordField: "password" },
     async (email, password, done) => {
       try {
-        const user = await User.findOne({ email });
-        if (!user || !(await user.verifyPassword(password))) {
+        const doctor = await Doctor.findOne({ email });
+        if (!doctor || !(await bcrypt.compare(password, doctor.password))) {
           return done(null, false, { message: "Invalid Email or Password" });
         } else {
-          return done(null, user);
+          return done(null, doctor);
         }
       } catch (error) {
         return done(error);
@@ -26,10 +27,10 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id)
+  Doctor.findById(id)
     .exec()
-    .then((user) => {
-      done(null, user);
+    .then((doctor) => {
+      done(null, doctor);
     })
     .catch((err) => {
       done(err, null);
