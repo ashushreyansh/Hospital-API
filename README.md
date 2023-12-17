@@ -1,8 +1,8 @@
 # Hospital-API
 
 API handled 
-0- /                             - root route is not handled
-1- /doctors/register             - registration for doctor
+0- /                             - root route is not handled<br/>
+1- /doctors/register             - registration for doctor /
 2- /doctors/login                - login for doctor
 3- /pateints/regiter             - authenticated route for doctors only for registering new patients or getting data of already existing patient
 4- /patients/:id                 - patient profile with patient DATA visualised
